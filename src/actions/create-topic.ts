@@ -1,4 +1,5 @@
 'use server';
+
 import type { Topic } from '@prisma/client'
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
@@ -29,6 +30,7 @@ export async function createTopic(
 ): Promise<CreateTopicFormState> {
     // const name = formData.get('name')
     // const description = formData.get('description')
+
     const result = createTopicSchema.safeParse({
         name: formData.get('name'),
         description: formData.get('description'),
@@ -76,6 +78,7 @@ export async function createTopic(
             }
         }
     }
+
     revalidatePath('/')
     redirect(paths.topicShow(topic.slug))
 }

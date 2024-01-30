@@ -12,40 +12,45 @@ import {
 } from '@nextui-org/react'
 
 import * as actions from '@/actions'
-import FormButton from '../common/form-button';
+import FormButton from '@/components/common/form-button'
 
-export default function TopicCreateForm() {
+interface PostCreateFormPorps {
+  slug: string
+}
+
+export default function PostCreateForm({ slug }: PostCreateFormPorps) {
   // caso o useFormState gere erro no primeiro parametro da ação, provavelmente é algo de tipagem.
   // Basta ir até a ação que ele executará e declarar uma tipagem para o formState (e retornar esse mesmo tipo) 
   // que seja a mesma do valor inicial passado no segundo parametro, nesse caso uma string
-  const [formState, action] = useFormState(actions.createTopic, {
+  const [formState, action] = useFormState(
+    actions.createPost.bind(null, slug), {
     errors: {}
   });
 
   return (
     <Popover placement='left'>
       <PopoverTrigger>
-        <Button color='primary'>Create a Topic</Button>
+        <Button color='primary'>Create a Post</Button>
       </PopoverTrigger>
       <PopoverContent>
         <form action={action}>
           <div className='flex flex-col gap-4 p-4 w-80'>
             <h3 className='text-lg'>Create a Topic</h3>
             <Input
-              label="Name"
-              name='name'
+              label="Title"
+              name='title'
               labelPlacement='outside'
-              placeholder="Name"
-              isInvalid={!!formState.errors.name} // como estamos usando next-ui, ele possui um validador interno
-              errorMessage={formState.errors.name?.join(', ')}
+              placeholder="Title"
+              isInvalid={!!formState.errors.title} // como estamos usando next-ui, ele possui um validador interno
+              errorMessage={formState.errors.title?.join(', ')}
             />
             <Textarea
-              label="Description"
-              name='description'
+              label="Content"
+              name='content'
               labelPlacement='outside'
-              placeholder="Describe your topic"
-              isInvalid={!!formState.errors.description}
-              errorMessage={formState.errors.description?.join(', ')}
+              placeholder="Content"
+              isInvalid={!!formState.errors.content}
+              errorMessage={formState.errors.content?.join(', ')}
             />
 
             {formState.errors._form
@@ -53,7 +58,7 @@ export default function TopicCreateForm() {
               : null
             }
 
-            <FormButton>Save</FormButton>
+            <FormButton>Create Post</FormButton>
           </div>
         </form>
       </PopoverContent>
