@@ -7,6 +7,7 @@ import {
 } from '@nextui-org/react'
 import HeaderAuth from './Header-auth'
 import SearchInput from './Search-input'
+import { Suspense } from 'react'
 
 /* Por baixo dos panos a função "auth" modifica os cookies. logo, se trata de um comportamento dinâmico.
    Então toda página que conter nosso Header seria tratada como dinâmica. Porém, como separamos nosso
@@ -25,7 +26,9 @@ export default function Header() {
 
       <NavbarContent justify='center'>
         <NavbarItem>
-          <SearchInput />
+          <Suspense>
+            <SearchInput />
+          </Suspense>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
