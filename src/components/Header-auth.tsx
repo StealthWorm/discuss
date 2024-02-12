@@ -25,7 +25,7 @@ export default function HeaderAuth() {
     authContent = null
   } else if (session.data?.user) {
     authContent =
-      <Popover placement='left'>
+      <Popover placement='left' id="avatar">
         <PopoverTrigger>
           <Avatar src={session.data.user.image || ""} />
         </PopoverTrigger>
@@ -40,7 +40,7 @@ export default function HeaderAuth() {
       </Popover>
   } else {
     authContent = <>
-      <NavbarItem>
+      <NavbarItem id="options">
         <form action={actions.signIn}>
           <Button type="submit" color="secondary" variant='bordered' >
             Sign In

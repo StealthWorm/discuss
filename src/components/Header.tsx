@@ -27,12 +27,12 @@ export default function Header() {
       <NavbarContent justify='center'>
         <NavbarItem>
           <Suspense>
-            <SearchInput />
+            <SearchInput data-testid="search-input" />
           </Suspense>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
-        <HeaderAuth />
+        <HeaderAuth data-testid="header-auth" />
       </NavbarContent>
     </Navbar>
   )

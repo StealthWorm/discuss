@@ -31,5 +31,5 @@ export default async function PostList({ fetchData }: PostListProps) {
     );
   });
 
-  return <div className="space-y-2">{renderedPosts}</div>;
+  return <div className="space-y-2" data-test-id="posts-container">{renderedPosts}</div>;
 }

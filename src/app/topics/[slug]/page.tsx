@@ -19,7 +19,7 @@ export default function TopicShowPage({ params }: TopicShowPageProps) {
         <h1 className="text-2xl font-bold mb-2">
           {decodedSlug}
         </h1>
-        <PostList fetchData={() => fetchPostByTopicSlug(decodedSlug)} />
+        <PostList fetchData={() => fetchPostByTopicSlug(decodedSlug)} data-test-id="posts" />
       </div>
 
       <div>

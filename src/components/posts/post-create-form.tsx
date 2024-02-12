@@ -28,7 +28,7 @@ export default function PostCreateForm({ slug }: PostCreateFormPorps) {
   });
 
   return (
-    <Popover placement='left'>
+    <Popover placement='left' id="post-create-form">
       <PopoverTrigger>
         <Button color='primary'>Create a Post</Button>
       </PopoverTrigger>
