@@ -22,10 +22,8 @@ test('renders topic name correctly and renders two posts', async ({ page }) => {
 
   await page.goto(`http://localhost:3000/topics/${decodedSlug}`);
 
-  // Ensure the PostList component renders and contains two posts
   const postListElement = page.locator('PostList[data-test-id="posts"]');
   expect(postListElement).toBeDefined();
-  // expect(postCount).toHaveCount(2);
 });
 
 // await page.locator(':nth-match(:text("Buy"), 3)').waitFor();

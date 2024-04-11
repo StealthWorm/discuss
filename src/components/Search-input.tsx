@@ -9,7 +9,7 @@ export default function SearchInput() {
 
   return (
     <form action={actions.search}>
-      <Input name="term" defaultValue={searchParams.get('term') || ''} />
+      <Input name="term" defaultValue={searchParams.get('term') || ''} data-test-id="search-input" />
     </form>
   )
 }

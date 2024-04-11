@@ -27,7 +27,7 @@ export default function Header() {
       <NavbarContent justify='center'>
         <NavbarItem>
           <Suspense>
-            <SearchInput data-testid="search-input" />
+            <SearchInput />
           </Suspense>
         </NavbarItem>
       </NavbarContent>

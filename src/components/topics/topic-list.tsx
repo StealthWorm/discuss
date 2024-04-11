@@ -8,7 +8,7 @@ export default async function TopicList() {
 
   const renderedTopics = topics.map((topic) => {
     return (
-      <div key={topic.id}>
+      <div key={topic.id} data-test-id="posts">
         <Link href={paths.topicShow(topic.slug)}>
           <Chip color="warning" variant="shadow">
             {topic.slug}
@@ -19,7 +19,7 @@ export default async function TopicList() {
   })
 
   return (
-    <div className="flex flex-row flex-wrap gap-2">
+    <div className="flex flex-row flex-wrap gap-2" data-test-id="topics">
       {renderedTopics}
     </div>
   )
