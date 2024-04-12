@@ -24,14 +24,15 @@ export default function TopicCreateForm() {
 
   return (
     <Popover placement='left'>
-      <PopoverTrigger>
+      <PopoverTrigger data-test-id="create-topic-button">
         <Button color='primary'>Create a Topic</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <form action={action}>
+        <form action={action} data-test-id="create-topic-popover">
           <div className='flex flex-col gap-4 p-4 w-80'>
             <h3 className='text-lg'>Create a Topic</h3>
             <Input
+              data-test-id="create-topic-name-input"
               label="Name"
               name='name'
               labelPlacement='outside'
@@ -40,6 +41,7 @@ export default function TopicCreateForm() {
               errorMessage={formState.errors.name?.join(', ')}
             />
             <Textarea
+              data-test-id="create-topic-description-input"
               label="Description"
               name='description'
               labelPlacement='outside'
