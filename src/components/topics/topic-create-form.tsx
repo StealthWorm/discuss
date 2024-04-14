@@ -51,7 +51,12 @@ export default function TopicCreateForm() {
             />
 
             {formState.errors._form
-              ? <div className='p-2 rounded text-red-400 bg-red-200 border border-red-400'>{formState.errors._form?.join(', ')}</div>
+              ? <div
+                data-test-id="create-topic-form-errors"
+                className='p-2 rounded text-red-400 bg-red-200 border border-red-400'
+              >
+                {formState.errors._form?.join(', ')}
+              </div>
               : null
             }
 

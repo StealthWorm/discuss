@@ -233,13 +233,14 @@ describe('Home Page', () => {
     })
   })
 
-  context('Create Topic Form', () => {
+  context('Create Topic Form only with Name filled', () => {
     before(() => {
       cy.get('[data-test-id="search-input"]').clear()
       cy.get('[data-test-id="search-input"]').type('{enter}')
+      // cy.reload()
     })
 
-    const input = {
+    const inputName = {
       text: '',
     }
 
@@ -261,8 +262,8 @@ describe('Home Page', () => {
     })
 
     it('When I enter text in the Name field', () => {
-      input.text = 'next';
-      cy.get('[data-test-id="create-topic-name-input"]').type(input.text);
+      inputName.text = 'test'
+      cy.get('[data-test-id="create-topic-name-input"]').type(inputName.text);
     })
 
     it('When I click in the "Save" button filling the Name input field', () => {
@@ -272,12 +273,74 @@ describe('Home Page', () => {
     it('Should validate the Form "Name" field', () => {
       cy.get('[data-test-id="create-topic-name-input"]')
         .should('have.attr', 'data-filled', 'true')
-        .and('have.attr', 'value', `${input.text}`)
+        .and('have.attr', 'value', `${inputName.text}`)
         .and(($element) => {
           const styles = window.getComputedStyle($element[0])
           const textColor = styles.getPropertyValue('color')
           expect(textColor).not.to.eq('rgb(243, 18, 96)')
         })
+    })
+  })
+
+  context('Create Topic Form when User is not logged in', () => {
+    before(() => {
+      cy.reload()
+    })
+
+    const inputs = {
+      name: { text: 'test name' },
+      description: { text: 'This is a test topic' }
+    }
+
+    it('When I click in the "Create Topic" button', () => {
+      registerForm.clickCreateTopic()
+    })
+
+    it('Should display create topic form', () => {
+      cy.get('[data-test-id="create-topic-popover"]').should('be.visible')
+    })
+
+    it('When I enter text in the form fields', () => {
+      cy.get('[data-test-id="create-topic-name-input"]').focus().type(inputs.name.text);
+      cy.wait(2000)
+      cy.get('[data-test-id="create-topic-description-input"]').focus().type(inputs.description.text);
+      cy.wait(2000)
+    })
+
+    it('When I click in the "Save" button filling the Name input field', () => {
+      registerForm.clickSaveTopic()
+    })
+
+    it('Should validate the Form fields without errors', () => {
+      cy.get('[data-test-id="create-topic-name-input"]')
+        .should('have.attr', 'data-filled', 'true')
+        .should('not.have.attr', 'aria-invalid', 'true')
+        .and('have.value', `${inputs.name.text}`)
+        .and(($element) => {
+          const styles = window.getComputedStyle($element[0])
+          const textColor = styles.getPropertyValue('color')
+          const text = $element.val();
+          expect(textColor).not.to.eq('rgb(243, 18, 96)')
+          expect(text.length).to.be.at.least(3);
+        })
+
+      cy.get('[data-test-id="create-topic-description-input"]')
+        .should('have.attr', 'data-filled', 'true')
+        .should('not.have.attr', 'aria-invalid', 'true')
+        .and('have.value', `${inputs.description.text}`)
+        .and(($element) => {
+          const styles = window.getComputedStyle($element[0])
+          const textColor = styles.getPropertyValue('color')
+          const text = $element.val();
+          expect(textColor).not.to.eq('rgb(243, 18, 96)')
+          expect(text.length).to.be.at.least(10);
+        })
+    })
+
+    it(`'Should display a box with the error "You must be signed in to do this."`, () => {
+      cy.get('[data-test-id="create-topic-form-errors"]')
+        .should('be.visible')
+        .and('contain', 'You must be signed in to do this.')
     })
   })
 
