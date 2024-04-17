@@ -25,15 +25,15 @@ export default function HeaderAuth() {
     authContent = null
   } else if (session.data?.user) {
     authContent =
-      <Popover placement='left' id="avatar">
+      <Popover placement='left' id="avatar" data-test-id='popover-user'>
         <PopoverTrigger>
-          <Avatar src={session.data.user.image || ""} />
+          <Avatar src={session.data.user.image || ""} data-test-id="signed-in-avatar" />
         </PopoverTrigger>
 
         <PopoverContent>
           <div className="p-4">
             <form action={actions.signOut}>
-              <Button type="submit">Sign Out</Button>
+              <Button type="submit" data-test-id="sign-out-button">Sign Out</Button>
             </form>
           </div>
         </PopoverContent>
@@ -42,14 +42,14 @@ export default function HeaderAuth() {
     authContent = <>
       <NavbarItem id="options">
         <form action={actions.signIn}>
-          <Button type="submit" color="secondary" variant='bordered' >
+          <Button type="submit" color="secondary" variant='bordered' data-test-id="sign-in-button">
             Sign In
           </Button>
         </form>
       </NavbarItem>
       <NavbarItem>
         <form action={actions.signIn}>
-          <Button type="submit" color="primary" variant='flat' >
+          <Button type="submit" color="primary" variant='flat' data-test-id="sign-up-button">
             Sign Up
           </Button>
         </form>

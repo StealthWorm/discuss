@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.cy.js", "cypress/e2e/page.cy.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.cy.js", "cypress/e2e/page.cy.js", "cypress/support/commands.js"],
   "exclude": ["node_modules"]
 }
