@@ -36,5 +36,5 @@ jobs:
         working-directory: ./cypress
 
       - name: Run Cypress tests
-        run: npm run cypress:headless
+        run: npm run cypress:headless -- --config baseUrl=http://localhost:3000
         working-directory: ./cypress

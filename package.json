@@ -11,7 +11,7 @@
     "test:jest": "jest --config ./jest.config.ts",
     "test:ui": "npx playwright test --ui",
     "cypress:web": "npx cypress open",
-    "cypress:headless": "npm run start && npx cypress run --browser electron"
+    "cypress:headless": "npx cypress run --browser electron"
   },
   "dependencies": {
     "@auth/core": "0.18.1",
