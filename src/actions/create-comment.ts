@@ -49,7 +49,7 @@ export async function createComment(
         content: result.data.content,
         postId: postId,
         parentId: parentId,
-        userId: session.user.id as string,
+        userId: session.user.id,
       },
     });
   } catch (err) {
