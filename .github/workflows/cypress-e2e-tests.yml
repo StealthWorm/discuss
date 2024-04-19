@@ -3,7 +3,7 @@ name: Run E2E Tests Cypress
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'discuss/cypress/**.js'
       - 'discuss/cypress/**.json'
