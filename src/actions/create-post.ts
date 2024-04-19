@@ -61,10 +61,8 @@ export async function createPost(
     }
   }
 
-  let post: Post
-
   try {
-    post = await db.post.create({
+    const post: Post = await db.post.create({
       data: {
         title: result.data.title,
         content: result.data.content,
@@ -72,6 +70,9 @@ export async function createPost(
         topicId: topic.id
       }
     })
+
+    revalidatePath(paths.topicShow(slug))
+    redirect(paths.postShow(slug, post.id))
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {
@@ -87,7 +88,4 @@ export async function createPost(
       }
     }
   }
-
-  revalidatePath(paths.topicShow(slug))
-  redirect(paths.postShow(slug, post.id))
 }

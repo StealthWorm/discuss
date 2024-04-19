@@ -44,14 +44,14 @@ export async function createComment(
   }
 
   try {
-    await db.comment.create({
-      data: {
-        content: result.data.content,
-        postId: postId,
-        parentId: parentId,
-        userId: session.user.id,
-      },
-    });
+    const commentData = {
+      content: result.data.content,
+      postId: postId,
+      parentId: parentId,
+      userId: session.user.id,
+    };
+
+    await db.comment.create({ data: commentData });
   } catch (err) {
     if (err instanceof Error) {
       return {
@@ -80,7 +80,15 @@ export async function createComment(
     };
   }
 
-  revalidatePath(paths.postShow(topic.slug, postId));
+  try {
+    revalidatePath(paths.postShow(topic.slug, postId));
+  } catch (err) {
+    return {
+      errors: {
+        _form: ["Failed to revalidate topic"],
+      },
+    };
+  }
 
   return {
     errors: {},
