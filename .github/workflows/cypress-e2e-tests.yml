@@ -46,5 +46,5 @@ jobs:
           GITHUB_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           GITHUB_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          # wait-on: 'http://localhost:3333'
+          # wait-on: 'http://localhost:3000'
           # config: baseUrl=http://localhost:3333
