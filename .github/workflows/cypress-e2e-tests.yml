@@ -1,7 +1,7 @@
 name: Run E2E Tests Cypress
 
 on:
-  # workflow_dispatch:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -16,7 +16,6 @@ on:
       - 'discuss/cypress/**.js'
       - 'discuss/cypress/**.json'
       - 'discuss/cypress/**.yml'
-
 
 jobs:
   run-e2e-tests:
