@@ -32,15 +32,12 @@ class HeaderAuthentication {
 const headerAuth = new HeaderAuthentication();
 
 describe('Header Authentication', () => {
-  before(() => {
-    cy.visit('/')
-  })
-
   beforeEach(() => {
     headerAuth.clearStorageAndReload();
   })
 
   it('Should render the buttons "Sign in" and "Sign up" when user is not signed in', () => {
+    cy.visit('/')
     cy.intercept('GET', '/api/auth/session', {}).as('session')
 
     cy.wait('@session').then(() => {
