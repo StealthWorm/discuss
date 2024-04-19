@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
+    "allowJs": true,
     "skipLibCheck": true,
-"strict": true,
+    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-"module": "esnext",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -21,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.cy.js", "cypress/e2e/page.cy.js", "cypress/support/commands.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

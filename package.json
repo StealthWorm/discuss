@@ -7,21 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx playwright test",
-    "test:jest": "jest --config ./jest.config.ts",
-    "test:ui": "npx playwright test --ui",
     "cypress:web": "npx cypress open",
-    "cypress:headless": "npm run build && npm run start && npx cypress run --browser electron"
+    "cypress:headless": "npm run build && npm run dev && npx cypress run --browser electron"
   },
   "dependencies": {
     "@auth/core": "0.18.1",
     "@auth/prisma-adapter": "1.0.6",
     "@nextui-org/react": "^2.2.9",
-    "@prisma/client": "^5.8.1",
-    "framer-motion": "^11.0.3",
-    "next": "14.1.0",
+    "@prisma/client": "^5.5.2",
+    "framer-motion": "^10.16.4",
+    "next": "14.0.2",
     "next-auth": "^5.0.0-beta.3",
-    "prisma": "^5.8.1",
+    "prisma": "^5.5.2",
     "react": "^18",
     "react-dom": "^18",
     "zod": "^3.22.4"
@@ -48,9 +45,6 @@
     "tailwindcss": "^3.3.0",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
-  },
-  "jest": {
-    "preset": "jest-playwright-preset"
+    "typescript": "^5"
   }
 }

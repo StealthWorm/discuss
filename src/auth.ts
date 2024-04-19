@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
-import Github from "next-auth/providers/github";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { db } from "./db";
+import NextAuth from 'next-auth';
+import Github from 'next-auth/providers/github';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { db } from '@/db';
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
@@ -15,8 +15,8 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   providers: [
     Github({
       clientId: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET
-    })
+      clientSecret: GITHUB_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
     // Usually  not needed, here we are fixing a bug in nextAuth
@@ -30,6 +30,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
         ...session,
         user,
       }
-    }
+    },
   }
-})
+});
