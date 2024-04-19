@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:web": "npx cypress open",
-    "cypress:headless": "npx cypress run --browser electron"
+    "cypress:headless": "npm run build && npm run dev && npx cypress run --browser electron"
   },
   "dependencies": {
     "@auth/core": "0.18.1",
