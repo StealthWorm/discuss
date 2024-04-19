@@ -5,6 +5,7 @@ import { z } from "zod";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import paths from "@/paths";
+import { Prisma } from "@prisma/client";
 
 const createCommentSchema = z.object({
   content: z.string().min(3),
@@ -44,7 +45,7 @@ export async function createComment(
   }
 
   try {
-    const commentData = {
+    const commentData: Prisma.CommentUncheckedCreateInput = {
       content: result.data.content,
       postId: postId,
       parentId: parentId,

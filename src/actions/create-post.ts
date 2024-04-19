@@ -1,6 +1,6 @@
 'use server';
 
-import type { Post } from '@prisma/client'
+import { Post, Prisma } from '@prisma/client'
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { z } from "zod";
@@ -61,14 +61,18 @@ export async function createPost(
     }
   }
 
+  // let post: Post
+
+  const postData: Prisma.PostUncheckedCreateInput = {
+    title: result.data.title,
+    content: result.data.content,
+    userId: session.user.id,
+    topicId: topic.id
+  };
+
   try {
-    const post: Post = await db.post.create({
-      data: {
-        title: result.data.title,
-        content: result.data.content,
-        userId: session.user.id,
-        topicId: topic.id
-      }
+    const post = await db.post.create({
+      data: postData
     })
 
     revalidatePath(paths.topicShow(slug))
@@ -88,4 +92,5 @@ export async function createPost(
       }
     }
   }
+
 }
