@@ -34,7 +34,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: ./discuss
+        working-directory: ./
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
