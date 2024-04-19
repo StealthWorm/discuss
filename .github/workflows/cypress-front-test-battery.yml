@@ -31,13 +31,15 @@ jobs:
           node-version: 20.12.1
           cache: 'npm'
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-
       - name: Install dependencies
         run: npm ci
         working-directory: ./discuss
 
       - name: Run Cypress tests
-        run: npm run cypress:headless -- --config baseUrl=http://localhost:3000
-        working-directory: ./discuss
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: ./discuss
+          build: npm run build
+          start: npm run cypress:headless
+          wait-on: 'http://localhost:3333'
+          config: baseUrl=http://localhost:3333
