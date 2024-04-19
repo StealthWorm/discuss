@@ -22,7 +22,7 @@ export default defineConfig({
       // implement node event listeners here
       // tasks(on, config);
     },
-    baseUrl: 'http://localhost:3000',
+    // baseUrl: 'http://localhost:3000',
     // não vai limpar o estado da tela após cada it
     testIsolation: false,
     supportFile: 'cypress/support/index.js',

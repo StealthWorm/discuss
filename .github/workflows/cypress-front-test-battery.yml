@@ -41,5 +41,5 @@ jobs:
           working-directory: ./discuss
           build: npm run build
           start: npm run cypress:headless
-          wait-on: 'http://localhost:3333'
-          config: baseUrl=http://localhost:3333
+          # wait-on: 'http://localhost:3333'
+          # config: baseUrl=http://localhost:3333
