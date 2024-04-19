@@ -34,7 +34,8 @@ export async function createComment(
   }
 
   const session = await auth();
-  if (!session || !session.user) {
+
+  if (!session || !session.user || !session.user.id) {
     return {
       errors: {
         _form: ["You must sign in to do this."],
@@ -80,6 +81,7 @@ export async function createComment(
   }
 
   revalidatePath(paths.postShow(topic.slug, postId));
+
   return {
     errors: {},
     success: true,

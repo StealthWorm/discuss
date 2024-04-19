@@ -40,7 +40,7 @@ export async function createPost(
   // session from server side
   const session = await auth();
 
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     return {
       errors: {
         _form: ['You must be signed in to do this.']
