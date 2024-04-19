@@ -61,22 +61,17 @@ export async function createPost(
     }
   }
 
-  // let post: Post
-
-  const postData: Prisma.PostUncheckedCreateInput = {
+  let postData: Prisma.PostUncheckedCreateInput = {
     title: result.data.title,
     content: result.data.content,
     userId: session.user.id,
     topicId: topic.id
   };
 
-  try {
-    const post = await db.post.create({
-      data: postData
-    })
+  let post: Post
 
-    revalidatePath(paths.topicShow(slug))
-    redirect(paths.postShow(slug, post.id))
+  try {
+    post = await db.post.create({ data: postData })
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {
@@ -93,4 +88,6 @@ export async function createPost(
     }
   }
 
+  revalidatePath(paths.topicShow(slug))
+  redirect(paths.postShow(slug, post.id))
 }
