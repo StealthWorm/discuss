@@ -43,8 +43,8 @@ jobs:
           build: npm run build
           start: npm run cypress:headless
         env:
-          GITHUB_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          GITHUB_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           # wait-on: 'http://localhost:3333'
           # config: baseUrl=http://localhost:3333
