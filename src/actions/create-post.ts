@@ -68,7 +68,7 @@ export async function createPost(
       data: {
         title: result.data.title,
         content: result.data.content,
-        userId: session.user.id,
+        userId: session.user.id as string,
         topicId: topic.id
       }
     })
