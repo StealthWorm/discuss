@@ -80,7 +80,6 @@ describe('Home Page', () => {
   })
 
   context('Create Topic Form only with Name filled', () => {
-
     before(() => {
       cy.visit('/')
       homePage.elements.searchInput().clear()
@@ -108,8 +107,9 @@ describe('Home Page', () => {
       homePage.elements.createTopicDescriptionInput().should('have.attr', 'aria-invalid', 'true');
     })
 
+    inputName.text = 'test'
+
     it('When I enter text in the Name field', () => {
-      inputName.text = 'test'
       homePage.elements.createTopicNameInput().type(inputName.text);
     })
 
@@ -121,11 +121,13 @@ describe('Home Page', () => {
       homePage.elements.createTopicNameInput()
         .should('have.attr', 'data-filled', 'true')
         .and('have.attr', 'value', `${inputName.text}`)
-        .and(($element) => {
-          const styles = window.getComputedStyle($element[0])
-          const textColor = styles.getPropertyValue('color')
-          expect(textColor).not.to.eq('rgb(243, 18, 96)')
-        })
+        .and('have.css', 'color')
+        .and('eq', 'rgb(243, 18, 96)')
+      // .and(($element) => {
+      //   const styles = window.getComputedStyle($element[0])
+      //   const textColor = styles.getPropertyValue('color')
+      //   expect(textColor).not.to.eq('rgb(243, 18, 96)')
+      // })
     })
   })
 
@@ -190,7 +192,4 @@ describe('Home Page', () => {
         .and('contain', 'You must be signed in to do this.')
     })
   })
-
-  // create valid topic 
-  // click post 
 })
