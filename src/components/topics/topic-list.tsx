@@ -8,8 +8,8 @@ export default async function TopicList() {
 
   const renderedTopics = topics.map((topic) => {
     return (
-      <div key={topic.id} data-test-id="posts">
-        <Link href={paths.topicShow(topic.slug)}>
+      <div key={topic.id} data-test-id="topic">
+        <Link href={paths.topicShow(topic.slug)} data-test-id="link">
           <Chip color="warning" variant="shadow">
             {topic.slug}
           </Chip>

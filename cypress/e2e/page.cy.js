@@ -193,3 +193,32 @@ describe('Home Page', () => {
     })
   })
 })
+
+describe('Comment Page', () => {
+  // should visit "`/topics/${topicSlug}/posts/${postId}`"
+  // must contain  {"< "}Back to {decodeURIComponent(slug)}
+  // should reveal div wih the content of the post
+  // 
+})
+
+describe('Home Page - Create Topic', () => {
+
+})
+
+describe('Home Page - Click Post', () => {
+
+})
+
+describe('Home Page - Create Comment', () => {
+  // go to homepage
+  // guarantee to locate list of posts
+  // click on post
+  // click on "reply" button
+  // should display:  the "create comment" button
+  // click on create comment
+  // click the button with empty input should display error "String must contain at least 3 character(s)"
+  // when filled, should add a new comment to the list of comments
+  // click on the link "back to <name of the topic>"
+  // should visit http://localhost:3000/topics/<name of the topic>
+  // should reveal the button "create post" about the specified topic
+})
