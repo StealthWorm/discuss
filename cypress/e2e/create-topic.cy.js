@@ -2,6 +2,7 @@
 describe('Topic Page', () => {
   beforeEach(() => {
     cy.visit('/')
+    cy.intercept('GET', '/api/auth/session', {}).as('session')
   })
 
   it('should redirect to the topic page when an item is clicked', () => {
