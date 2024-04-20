@@ -8,7 +8,6 @@ describe('Topic Page', () => {
   it('should redirect to the topic page when an item is clicked', () => {
     cy.get('[data-test-id="topics"]').within(() => {
       cy.get('[data-test-id="topic"]').each(($chip) => {
-        // Get the text of the chip
         const topicSlug = $chip.text().trim();
         // const topicSlug = $chip.text().split(' ').join('%20');
 
@@ -19,13 +18,8 @@ describe('Topic Page', () => {
           expect(link.innerText.trim()).to.equal(topicSlug);
         });
 
-        // Click on the chip
         // cy.wrap($chip).find('[data-test-id="link"]').click();
-
-        // Wait for the URL to change to the corresponding topic page URL
         // cy.url().should('include', `/topics/${topicSlug}`);
-
-        // Go back to the original page to test the next chip
         cy.go('back')
       });
     });
