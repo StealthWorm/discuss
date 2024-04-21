@@ -4,7 +4,7 @@ class HomePage {
     createTopicButton: () => cy.get('[data-test-id="create-topic-button"]'),
     createTopicNameInput: () => cy.get('[data-test-id="create-topic-name-input"]'),
     createTopicDescriptionInput: () => cy.get('[data-test-id="create-topic-description-input"]'),
-    saveTopicButton: () => cy.get('[data-test-id="create-topic-form-button-save"]')
+    saveTopicButton: () => cy.get('[data-test-id="form-button-save"]')
   }
 
   typeText(text) {
