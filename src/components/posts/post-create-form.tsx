@@ -33,7 +33,7 @@ export default function PostCreateForm({ slug }: PostCreateFormPorps) {
         <Button color='primary'>Create a Post</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <form action={action} data-test-id="create-post-popover">
+        <form action={action} data-test-id="create-post-form">
           <div className='flex flex-col gap-4 p-4 w-80'>
             <h3 className='text-lg'>Create a Post</h3>
             <Input
@@ -56,7 +56,12 @@ export default function PostCreateForm({ slug }: PostCreateFormPorps) {
             />
 
             {formState.errors._form
-              ? <div className='p-2 rounded text-red-400 bg-red-200 border border-red-400'>{formState.errors._form?.join(', ')}</div>
+              ? <div
+                data-test-id="create-post-form-errors"
+                className='p-2 rounded text-red-400 bg-red-200 border border-red-400'
+              >
+                {formState.errors._form?.join(', ')}
+              </div>
               : null
             }
 
