@@ -18,7 +18,7 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
 
   return (
     <div className="space-y-3">
-      <Link className="underline decoration-solid" href={paths.topicShow(slug)}>
+      <Link className="underline decoration-solid" href={paths.topicShow(slug)} data-test-id="post-back-button">
         {"< "}Back to {decodeURIComponent(slug)}
       </Link>
       <Suspense fallback={<PostShowLoading />}>

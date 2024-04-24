@@ -35,9 +35,10 @@ export default function CommentCreateForm({
   }, [formState, startOpen]);
 
   const form = (
-    <form action={action} ref={ref}>
+    <form action={action} ref={ref} data-test-id="post-reply-form">
       <div className="space-y-2 px-1">
         <Textarea
+          data-test-id="post-reply-input"
           name="content"
           label="Reply"
           placeholder="Enter your comment"
@@ -46,19 +47,22 @@ export default function CommentCreateForm({
         />
 
         {formState.errors._form ? (
-          <div className="p-2 bg-red-200 border rounded border-red-400">
+          <div
+            data-test-id="create-comment-form-errors"
+            className="p-2 bg-red-200 border rounded border-red-400"
+          >
             {formState.errors._form?.join(", ")}
           </div>
         ) : null}
 
-        <FormButton>Create Comment</FormButton>
+        <FormButton data-test-id='form-button-save'>Create Comment</FormButton>
       </div>
     </form>
   );
 
   return (
     <div>
-      <Button size="sm" variant="light" onClick={() => setOpen(!open)}>
+      <Button size="sm" variant="light" onClick={() => setOpen(!open)} data-test-id="post-reply-button">
         Reply
       </Button>
       {open && form}
