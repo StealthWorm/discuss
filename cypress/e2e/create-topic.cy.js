@@ -1,4 +1,4 @@
-describe('Topic Page - Topic Click Redirect', () => {
+describe('Topic Page', () => {
   before(() => {
     cy.visit('/')
   })
