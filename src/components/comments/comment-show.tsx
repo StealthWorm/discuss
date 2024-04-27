@@ -25,19 +25,28 @@ export default async function CommentShow({ commentId, postId }: CommentShowProp
 
   return (
     <div className="p-4 border mt-2 mb-1">
-      <div className="flex gap-3">
+      <div className="flex gap-3" data-test-id="comment">
         <Image
           src={comment.user.image || ""}
           alt="user image"
           width={40}
           height={40}
           className="w-10 h-10 rounded-full"
+          data-test-id="comment-user-image"
         />
         <div className="flex-1 space-y-3">
-          <p className="text-sm font-medium text-gray-500">
+          <p
+            className="text-sm font-medium text-gray-500"
+            data-test-id="comment-user-name"
+          >
             {comment.user.name}
           </p>
-          <p className="text-gray-900">{comment.content}</p>
+          <p
+            className="text-gray-900"
+            data-test-id="comment-content"
+          >
+            {comment.content}
+          </p>
 
           <CommentCreateForm postId={comment.postId} parentId={comment.id} />
         </div>
