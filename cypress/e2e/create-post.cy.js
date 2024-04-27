@@ -57,3 +57,5 @@ describe('Post Page', () => {
     })
   })
 })
+// check if a comment has a owner avatar, name and message
+// check the syles of the validation form and text of the create comment button

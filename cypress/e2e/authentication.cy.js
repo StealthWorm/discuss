@@ -12,32 +12,17 @@ class HeaderAuthentication {
     cy.clearAllSessionStorage();
     cy.reload();
   }
-  // clickSignIn() {
-  //   this.elements.signInButton().click();
-  // }
-
-  // clickSignUp() {
-  //   this.elements.signUpButton().click();
-  // }
-
-  // clickAvatar() {
-  //   this.elements.signedInAvatar().click();
-  // }
-
-  // clickSignOut() {
-  //   this.elements.signOutButton().click();
-  // }
 }
 
 const headerAuth = new HeaderAuthentication();
 
 describe('Header Authentication', () => {
   beforeEach(() => {
+    cy.visit('/')
     headerAuth.clearStorageAndReload();
   })
 
   it('Should render the buttons "Sign in" and "Sign up" when user is not signed in', () => {
-    cy.visit('/')
     cy.intercept('GET', '/api/auth/session', {}).as('session')
 
     cy.wait('@session').then(() => {
