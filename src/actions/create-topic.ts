@@ -8,6 +8,8 @@ import { db } from '@/db';
 import paths from '@/paths'
 import { revalidatePath } from 'next/cache';
 
+import * as Sentry from "@sentry/nextjs";
+
 const createTopicSchema = z.object({
     name: z
         .string()
@@ -37,6 +39,7 @@ export async function createTopic(
     });
 
     if (!result.success) {
+        Sentry.captureException(result.error.flatten().fieldErrors);
         return {
             errors: result.error.flatten().fieldErrors
         }
@@ -46,6 +49,7 @@ export async function createTopic(
     const session = await auth();
 
     if (!session || !session.user) {
+        Sentry.captureException('User not logged in');
         return {
             errors: {
                 _form: ['You must be signed in to do this.']
@@ -56,7 +60,6 @@ export async function createTopic(
     let topic: Topic
 
     try {
-        // throw new Error(' Failed to create topic')
         topic = await db.topic.create({
             data: {
                 slug: result.data.name,
@@ -65,12 +68,14 @@ export async function createTopic(
         })
     } catch (err: unknown) {
         if (err instanceof Error) {
+            Sentry.captureException(err.message);
             return {
                 errors: {
                     _form: [err.message]
                 }
             }
         } else {
+            Sentry.captureException('Something went wrong');
             return {
                 errors: {
                     _form: ['Something went wrong']

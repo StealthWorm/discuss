@@ -12,11 +12,8 @@ interface CommentCreateFormProps {
   startOpen?: boolean;
 }
 
-export default function CommentCreateForm({
-  postId,
-  parentId,
-  startOpen,
-}: CommentCreateFormProps) {
+// custom hook with logic
+export function useCommentCreateForm({ postId, parentId, startOpen }: CommentCreateFormProps) {
   const [open, setOpen] = useState(startOpen);
   const ref = useRef<HTMLFormElement | null>(null);
   const [formState, action] = useFormState(
@@ -59,6 +56,20 @@ export default function CommentCreateForm({
       </div>
     </form>
   );
+
+  return {
+    open,
+    setOpen,
+    form,
+  };
+}
+
+export default function CommentCreateForm({
+  postId,
+  parentId,
+  startOpen,
+}: CommentCreateFormProps) {
+  const { open, setOpen, form } = useCommentCreateForm({ postId, parentId, startOpen });
 
   return (
     <div>
