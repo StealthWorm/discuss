@@ -19,7 +19,7 @@ export function useCommentCreateForm({ postId, parentId, startOpen }: CommentCre
   const [formState, action] = useFormState(
     actions.createComment.bind(null, { postId, parentId }),
     { errors: {} }
-  );
+  ); // versões do next 15 trazem esse hook como "useActionState"
 
   useEffect(() => {
     if (formState.success) {
