@@ -19,8 +19,7 @@ export default async function CommentShow({ commentId, postId }: CommentShowProp
   const children = comments.filter((c) => c.parentId === commentId);
   const renderedChildren = children.map((child) => {
     return (
-      // <CommentShow key={child.id} commentId={child.id} postId={postId} />
-      <CommentShow key={child.id} commentId={child.id} comments={comments} />
+      <CommentShow key={child.id} commentId={child.id} postId={postId} />
     );
   });
 

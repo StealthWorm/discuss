@@ -22,7 +22,7 @@ export default function PostCreateForm({ slug }: PostCreateFormProps) {
   // caso o useFormState gere erro no primeiro parametro da ação, provavelmente é algo de tipagem.
   // Basta ir até a ação que ele executará e declarar uma tipagem para o formState (e retornar esse mesmo tipo) 
   // que seja a mesma do valor inicial passado no segundo parametro, nesse caso uma string
-  const [formState, action] = useActionState(
+  const [formState, action, isPending] = useActionState(
     actions.createPost.bind(null, slug), {
     errors: {}
   });
@@ -65,7 +65,7 @@ export default function PostCreateForm({ slug }: PostCreateFormProps) {
               : null
             }
 
-            <FormButton>Create Post</FormButton>
+            <FormButton isLoading={isPending}>Create Post</FormButton>
           </div>
         </form>
       </PopoverContent>

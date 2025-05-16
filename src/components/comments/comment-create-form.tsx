@@ -54,7 +54,7 @@ export default function CommentCreateForm({
           </div>
         ) : null}
 
-        <FormButton data-test-id='form-button-save'>Create Comment</FormButton>
+        <FormButton data-test-id='form-button-save' isLoading={isPending}>Create Comment</FormButton>
       </div>
     </form>
   );

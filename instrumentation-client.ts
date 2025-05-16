@@ -19,10 +19,10 @@ const monitorLocalStorage = () => {
   let readCount = 0; // Contador de leituras do localStorage
 
   const originalGetItem = localStorage.getItem;
-  localStorage.getItem = function (key) {
+  localStorage.getItem = function (key: string): string | null {
     readCount++; // Incrementa o contador de leituras
     Sentry.setMeasurement("localStorageRead", readCount, "read"); // Registra a medição
-    return originalGetItem.apply(this, arguments);
+    return originalGetItem.call(this, key);
   };
 };
 
