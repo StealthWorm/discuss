@@ -1,7 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useActionState } from "react";
 import { Textarea, Button } from "@nextui-org/react";
 import FormButton from "@/components/common/form-button";
 import * as actions from "@/actions";
@@ -12,14 +11,17 @@ interface CommentCreateFormProps {
   startOpen?: boolean;
 }
 
-// custom hook with logic
-export function useCommentCreateForm({ postId, parentId, startOpen }: CommentCreateFormProps) {
+export default function CommentCreateForm({
+  postId,
+  parentId,
+  startOpen
+}: CommentCreateFormProps) {
   const [open, setOpen] = useState(startOpen);
   const ref = useRef<HTMLFormElement | null>(null);
-  const [formState, action] = useFormState(
+  const [formState, action, isPending] = useActionState(
     actions.createComment.bind(null, { postId, parentId }),
     { errors: {} }
-  ); // versões do next 15 trazem esse hook como "useActionState"
+  );
 
   useEffect(() => {
     if (formState.success) {
@@ -57,23 +59,9 @@ export function useCommentCreateForm({ postId, parentId, startOpen }: CommentCre
     </form>
   );
 
-  return {
-    open,
-    setOpen,
-    form,
-  };
-}
-
-export default function CommentCreateForm({
-  postId,
-  parentId,
-  startOpen,
-}: CommentCreateFormProps) {
-  const { open, setOpen, form } = useCommentCreateForm({ postId, parentId, startOpen });
-
   return (
     <div>
-      <Button size="sm" variant="light" onClick={() => setOpen(!open)} data-test-id="post-reply-button">
+      <Button size="sm" variant="light" onClick={() => setOpen(!open)}>
         Reply
       </Button>
       {open && form}

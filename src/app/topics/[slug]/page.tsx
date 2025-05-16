@@ -3,13 +3,13 @@ import PostList from "@/components/posts/post-list";
 import { fetchPostByTopicSlug } from "@/db/queries/posts";
 
 interface TopicShowPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  }
+  }>;
 }
 
-export default function TopicShowPage({ params }: TopicShowPageProps) {
-  const { slug } = params;
+export default async function TopicShowPage({ params }: TopicShowPageProps) {
+  const { slug } = await params;
 
   const decodedSlug = decodeURIComponent(slug);
 

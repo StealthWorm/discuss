@@ -1,6 +1,6 @@
 'use client';
 
-import { useFormState } from 'react-dom'
+import { useActionState, startTransition } from 'react';
 
 import {
   Input,
@@ -15,12 +15,20 @@ import * as actions from '@/actions'
 import FormButton from '../common/form-button';
 
 export default function TopicCreateForm() {
-  // caso o useFormState gere erro no primeiro parametro da ação, provavelmente é algo de tipagem.
+  // caso o useFormState (pré-next 15, agora é useActionState) gere erro no primeiro parametro da ação, provavelmente é algo de tipagem.
   // Basta ir até a ação que ele executará e declarar uma tipagem para o formState (e retornar esse mesmo tipo) 
   // que seja a mesma do valor inicial passado no segundo parametro, nesse caso uma string
-  const [formState, action] = useFormState(actions.createTopic, {
+  const [formState, action, isPending] = useActionState(actions.createTopic, {
     errors: {}
   });
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => {
+      action(formData);
+    });
+  }
 
   return (
     <Popover placement='left'>
@@ -28,7 +36,7 @@ export default function TopicCreateForm() {
         <Button color='primary'>Create a Topic</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <form action={action} data-test-id="create-topic-popover">
+        <form onSubmit={handleSubmit} noValidate data-test-id="create-topic-popover">
           <div className='flex flex-col gap-4 p-4 w-80'>
             <h3 className='text-lg'>Create a Topic</h3>
             <Input
@@ -60,7 +68,7 @@ export default function TopicCreateForm() {
               : null
             }
 
-            <FormButton>Save</FormButton>
+            <FormButton isLoading={isPending}>Save</FormButton>
           </div>
         </form>
       </PopoverContent>

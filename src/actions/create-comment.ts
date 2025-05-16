@@ -45,14 +45,14 @@ export async function createComment(
   }
 
   try {
-    const commentData: Prisma.CommentUncheckedCreateInput = {
-      content: result.data.content,
-      postId: postId,
-      parentId: parentId,
-      userId: session.user.id || "",
-    };
-
-    await db.comment.create({ data: commentData });
+    await db.comment.create({
+      data: {
+        content: result.data.content,
+        postId: postId,
+        parentId: parentId,
+        userId: session.user.id,
+      },
+    });
   } catch (err) {
     if (err instanceof Error) {
       return {
@@ -81,15 +81,7 @@ export async function createComment(
     };
   }
 
-  try {
-    revalidatePath(paths.postShow(topic.slug, postId));
-  } catch (err) {
-    return {
-      errors: {
-        _form: ["Failed to revalidate topic"],
-      },
-    };
-  }
+  revalidatePath(paths.postShow(topic.slug, postId));
 
   return {
     errors: {},
