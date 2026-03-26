@@ -19,11 +19,9 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
       <Link className="underline decoration-solid" href={paths.topicShow(slug)} data-test-id="post-back-button">
         {"< "}Back to {slug}
       </Link>
-      {/* <Suspense fallback={<PostShowLoading />}>
-        <PostShow postId={postId} />
-      </Suspense>
+      <PostShow postId={postId} />
       <CommentCreateForm postId={postId} startOpen />
-      <CommentList postId={postId} /> */}
+      <CommentList postId={postId} />
     </div>
   );
 }

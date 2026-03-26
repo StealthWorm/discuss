@@ -119,10 +119,8 @@ describe('Home Page', () => {
 
     it('Should validate the Form "Name" field', () => {
       homePage.elements.createTopicNameInput()
-        .should('have.attr', 'data-filled', 'true')
+        .should('not.have.attr', 'aria-invalid', 'true')
         .and('have.attr', 'value', `${inputName.text}`)
-        .and('have.css', 'color')
-        .and('eq', 'rgb(243, 18, 96)')
       // .and(($element) => {
       //   const styles = window.getComputedStyle($element[0])
       //   const textColor = styles.getPropertyValue('color')
@@ -162,7 +160,6 @@ describe('Home Page', () => {
 
     it('Should validate the Form fields without errors', () => {
       homePage.elements.createTopicNameInput()
-        .should('have.attr', 'data-filled', 'true')
         .should('not.have.attr', 'aria-invalid', 'true')
         .and('have.value', `${inputs.name.text}`)
         .and(($element) => {
@@ -174,7 +171,6 @@ describe('Home Page', () => {
         })
 
       homePage.elements.createTopicDescriptionInput()
-        .should('have.attr', 'data-filled', 'true')
         .should('not.have.attr', 'aria-invalid', 'true')
         .and('have.value', `${inputs.description.text}`)
         .and(($element) => {

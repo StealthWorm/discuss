@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:web": "npx cypress open",
-    "cypress:headless": "npm run build && npm run start && npx cypress run --browser electron",
+    "cypress:headless": "npm run db:reset:test && dotenv -e .env.local -o -- npm run build && start-server-and-test \"dotenv -e .env.local -o -- npm run start\" http://localhost:3000 \"dotenv -e .env.local -o -- npm run cypress:build\"",
     "cypress:build": "npx cypress run --browser electron",
-    "start:db": "docker run --rm -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -e POSTGRES_HOST_AUTH_METHOD=trust postgres",
+    "db:seed": "dotenv -e .env.local -o -- npx tsx prisma/seed.ts",
+    "db:reset:test": "dotenv -e .env.local -o -- npx prisma migrate reset --force && npm run db:seed",
+    "start:db": "docker run -d --name discuss-postgres -p 5433:5432 -v discuss-postgres-data-v2:/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=discuss postgres:16",
+    "stop:db": "docker rm -f discuss-postgres",
     "prisma:migrate:local": "dotenv -e .env.local -- npx prisma migrate dev --schema=prisma/schema.prisma",
     "prisma:generate:local": "dotenv -e .env.local -- npx prisma generate --schema=prisma/schema.prisma",
     "postinstall": "prisma generate"
@@ -19,13 +22,15 @@
     "@auth/core": "^0.37.4",
     "@auth/prisma-adapter": "^2.7.4",
     "@nextui-org/react": "^2.6.11",
-    "@prisma/client": "^6.2.1",
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.5.0",
     "@sentry/nextjs": "^9.19.0",
     "dotenv-cli": "^8.0.0",
     "framer-motion": "^11.16.4",
     "next": "15.1.4",
     "next-auth": "^5.0.0-beta.25",
-    "prisma": "^6.2.1",
+    "pg": "^8.20.0",
+    "prisma": "^7.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zod": "^3.24.1"
@@ -39,7 +44,9 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "postcss": "^8",
+    "start-server-and-test": "^3.0.0",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

@@ -1,6 +1,14 @@
+# discuss
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+
+### Environment setup
+
+1. Copy `.env.example` to `.env.local`
+2. Fill `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` and `AUTH_SECRET`
+3. Keep real secrets only in `.env.local` (already ignored by git)
 
 First, run the development server:
 

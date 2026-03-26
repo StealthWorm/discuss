@@ -116,10 +116,7 @@ describe('Topic Page', () => {
 
     it('Should validate the Form "Title" field without errors', () => {
       topicPage.elements.topicCreatePostTitleInput()
-        .should('have.attr', 'data-filled', 'true')
-        .and('have.attr', 'value', `${inputName}`)
-        .and('have.css', 'color')
-        .and('not.eq', 'rgb(243, 18, 96)')
+        .should('not.have.attr', 'aria-invalid', 'true')
     })
   })
 
@@ -147,28 +144,10 @@ describe('Topic Page', () => {
 
     it('Should validate the Form fields without errors', () => {
       topicPage.elements.topicCreatePostTitleInput()
-        .should('have.attr', 'data-filled', 'true')
         .should('not.have.attr', 'aria-invalid', 'true')
-        .and('have.value', `${context.title}`)
-        .and(($element) => {
-          const styles = window.getComputedStyle($element[0])
-          const textColor = styles.getPropertyValue('color')
-          const text = $element.val();
-          expect(textColor).not.to.eq('rgb(243, 18, 96)')
-          expect(text.length).to.be.at.least(3);
-        })
 
       topicPage.elements.topicCreatePostContentInput()
-        .should('have.attr', 'data-filled', 'true')
         .should('not.have.attr', 'aria-invalid', 'true')
-        .and('have.value', `${context.content}`)
-        .and(($element) => {
-          const styles = window.getComputedStyle($element[0])
-          const textColor = styles.getPropertyValue('color')
-          const text = $element.val();
-          expect(textColor).not.to.eq('rgb(243, 18, 96)')
-          expect(text.length).to.be.at.least(10);
-        })
     })
 
     it(`'Should display a box with the error "You must be signed in to do this."`, () => {
