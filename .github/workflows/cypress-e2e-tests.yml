@@ -19,6 +19,14 @@ jobs:
   run-e2e-tests:
     name: Run E2E Tests
     runs-on: ubuntu-latest
+    env:
+      GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+      GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+      AUTH_TRUST_HOST: true
+      AUTH_URL: http://localhost:3000
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/discuss?schema=public
+      DIRECT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/discuss?schema=public
     services:
       postgres:
         image: postgres:16
@@ -55,11 +63,3 @@ jobs:
           start: npm run start
           wait-on: 'http://localhost:3000'
           command: npm run cypress:build
-        env:
-          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
-          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          AUTH_TRUST_HOST: true
-          AUTH_URL: http://localhost:3000
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/discuss?schema=public
-          DIRECT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/discuss?schema=public
