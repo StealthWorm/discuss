@@ -8,9 +8,20 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const hasGithubOAuth = !!GITHUB_CLIENT_ID && !!GITHUB_CLIENT_SECRET;
 
+const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const redirectProxyUrl =
+  process.env.AUTH_REDIRECT_PROXY_URL ||
+  (process.env.VERCEL_ENV === "preview" && productionHost
+    ? `https://${productionHost}/api/auth`
+    : undefined);
+
 export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
   trustHost: true,
+  ...(redirectProxyUrl ? { redirectProxyUrl } : {}),
+  pages: {
+    error: "/auth/error",
+  },
   providers: hasGithubOAuth
     ? [
         Github({
