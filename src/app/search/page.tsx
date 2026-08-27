@@ -2,6 +2,8 @@ import { redirect } from "next/navigation"
 import { fetchPostBySearchTerm } from "@/db/queries/posts"
 import PostList from "@/components/posts/post-list"
 
+export const dynamic = "force-dynamic";
+
 interface SearchPageProps {
   searchParams: Promise<{
     term: string

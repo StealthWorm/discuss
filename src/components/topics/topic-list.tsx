@@ -4,7 +4,9 @@ import Link from "next/link"
 import paths from "@/paths"
 
 export default async function TopicList() {
-  const topics = await db.topic.findMany()
+  const topics = await db.topic.findMany({
+    orderBy: { createdAt: "asc" },
+  })
 
   const renderedTopics = topics.map((topic) => {
     return (

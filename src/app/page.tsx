@@ -4,6 +4,8 @@ import { Divider } from "@nextui-org/react";
 import { fetchTopPosts } from "@/db/queries/posts";
 import PostList from "@/components/posts/post-list";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
 
   return (

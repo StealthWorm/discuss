@@ -4,6 +4,8 @@ import CommentList from "@/components/comments/comment-list";
 import CommentCreateForm from "@/components/comments/comment-create-form";
 import paths from "@/paths";
 
+export const dynamic = "force-dynamic";
+
 interface PostShowPageProps {
   params: Promise<{
     slug: string;

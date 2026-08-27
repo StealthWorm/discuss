@@ -2,6 +2,8 @@ import PostCreateForm from "@/components/posts/post-create-form";
 import PostList from "@/components/posts/post-list";
 import { fetchPostByTopicSlug } from "@/db/queries/posts";
 
+export const dynamic = "force-dynamic";
+
 interface TopicShowPageProps {
   params: Promise<{
     slug: string;

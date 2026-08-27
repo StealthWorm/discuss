@@ -33,6 +33,7 @@ export function fetchPostBySearchTerm(term: string) {
 export function fetchPostByTopicSlug(slug: string): Promise<PostWithData[]> {
   return db.post.findMany({
     where: { topic: { slug } },
+    orderBy: { createdAt: "asc" },
     include: {
       topic: {
         select: {
