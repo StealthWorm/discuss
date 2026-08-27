@@ -17,6 +17,9 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
           clientId: GITHUB_CLIENT_ID,
           clientSecret: GITHUB_CLIENT_SECRET,
           checks: ["state"],
+          // GitHub sends iss=https://github.com/login/oauth (RFC 9207).
+          // Auth.js otherwise infers https://github.com and the callback 500s.
+          issuer: "https://github.com/login/oauth",
         }),
       ]
     : [
